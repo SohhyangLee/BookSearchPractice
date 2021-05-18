@@ -9,7 +9,7 @@ interface NaverAPI {
     suspend fun getSearchBook(
         @Header("X-Naver-Client-Id") cliendId: String,
         @Header("X-Naver-Client-Secret") clientSecret: String,
-        @Query("query") query: String,
-        @Query("display") display: Int? = null,
-        @Query("start") start: Int? = null
+        @Query("query") query: String?,
+        @Query("display") display: Int? = 10,
+        @Query("start") start: Int? = 1
     ): BookInfo}
