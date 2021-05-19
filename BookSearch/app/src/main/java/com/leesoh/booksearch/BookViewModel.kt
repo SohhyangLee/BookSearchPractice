@@ -10,10 +10,15 @@ class BookViewModel(var query: String?) : ViewModel() {
         getAllTitles()
     }
 
+    private var _hasResult: MutableLiveData<Boolean> = MutableLiveData()
+    val hasResult: LiveData<Boolean> = _hasResult
+
     lateinit var dataSourceFactory: BookDataSourceFactory
 
     private fun getAllTitles(): LiveData<PagedList<Item>> {
-        dataSourceFactory = BookDataSourceFactory(mutableListOf(), viewModelScope, query)
+        dataSourceFactory = BookDataSourceFactory(viewModelScope, query) {
+            _hasResult.postValue(it)
+        }
         val pagedListConfig = PagedList.Config.Builder()
                 .setPageSize(10)
                 .setInitialLoadSizeHint(10)

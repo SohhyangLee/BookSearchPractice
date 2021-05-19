@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,14 +29,20 @@ class MainActivity : AppCompatActivity() {
         recyclerResultView.addItemDecoration(
                 DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         )
-        viewModel.bookInfoLiveData.observe(this, Observer {data ->
+        viewModel.bookInfoLiveData.observe(this, Observer { data ->
             bookListAdapter.submitList(data)
         })
-        textChanged()
-    }
 
-    fun refreshSearchResult(query: String?){
-        viewModel.invalidate(query)
+        viewModel.hasResult.observe(this, Observer {
+            if (it) {
+                recyclerResultView.visibility = View.VISIBLE
+                emptyView.visibility = View.GONE
+            } else {
+                recyclerResultView.visibility = View.GONE
+                emptyView.visibility = View.VISIBLE
+            }
+        })
+        textChanged()
     }
 
     private val textWatcher = object : TextWatcher {
@@ -43,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             timer.schedule(object:TimerTask(){
                 override fun run() {
                     searchKeyword = s.toString()
-                    refreshSearchResult(searchKeyword)
+                    viewModel.invalidate(searchKeyword)
                 }
             }, 1000)
         }
@@ -58,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        var searchKeyword = "집"
+        var searchKeyword = ""
     }
 }
 

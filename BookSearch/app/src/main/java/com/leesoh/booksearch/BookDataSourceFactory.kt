@@ -6,13 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import kotlinx.coroutines.CoroutineScope
 
-class BookDataSourceFactory(val loadedItems: MutableList<Item>, val viewModelScope: CoroutineScope, var query: String?): DataSource.Factory<Int, Item>() {
+class BookDataSourceFactory(val viewModelScope: CoroutineScope, var query: String?, var hasResult: (Boolean) -> Unit): DataSource.Factory<Int, Item>() {
 
     val mutableLiveData: MutableLiveData<BookItemKeyedDataSource> = MutableLiveData()
     var repoDataSource: BookItemKeyedDataSource? = null
 
     override fun create(): DataSource<Int, Item> {
-        repoDataSource = BookItemKeyedDataSource(loadedItems, viewModelScope, query)
+        repoDataSource = BookItemKeyedDataSource(viewModelScope, query, hasResult)
         mutableLiveData.postValue(repoDataSource)
         return requireNotNull(repoDataSource)
     }
