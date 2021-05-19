@@ -11,9 +11,7 @@ class BookDetailActivity : AppCompatActivity(){
         setContentView(R.layout.activity_details)
 
         if(intent.hasExtra("title")){
-            val title1 = (intent.getStringExtra("title"))?.replace("<b>", "")
-            val title2 = title1?.replace("</b>", "")
-            titleTextView.text = title2
+            titleTextView.text = (intent.getStringExtra("title"))?.replace("<b>", "")?.replace("</b>", "")
         }
         if(intent.hasExtra("image")){
             Picasso.get().load(intent.getStringExtra("image")).error(R.drawable.ic_launcher_background).into(imageView)
@@ -25,9 +23,7 @@ class BookDetailActivity : AppCompatActivity(){
             priceTextView.text = intent.getStringExtra("price") + " / " + intent.getStringExtra("discount")
         }
         if (intent.hasExtra("description")){
-            val description1 = (intent.getStringExtra("description"))?.replace("<b>", "")
-            val description2 = description1?.replace("</b>", "")
-            descriptionTextView.text = description2
+            descriptionTextView.text = (intent.getStringExtra("description"))?.replace("<b>", "")?.replace("</b>", "")
         }
         if (intent.hasExtra("publisher")){
             publisherTextView.text = intent.getStringExtra("publisher")

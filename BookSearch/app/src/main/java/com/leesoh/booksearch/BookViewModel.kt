@@ -5,14 +5,15 @@ import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 
-class BookViewModel(val lifecycleCoroutineScope: LifecycleCoroutineScope) : ViewModel() {
+class BookViewModel(var query: String?) : ViewModel() {
     val bookInfoLiveData: LiveData<PagedList<Item>> by lazy {
         getAllTitles()
     }
 
+    lateinit var dataSourceFactory: BookDataSourceFactory
+
     private fun getAllTitles(): LiveData<PagedList<Item>> {
-        Log.d("LSH", "BookViewModel - getAllTitles")
-        val dataSourceFactory = BookDataSourceFactory(mutableListOf(), lifecycleCoroutineScope)
+        dataSourceFactory = BookDataSourceFactory(mutableListOf(), viewModelScope, query)
         val pagedListConfig = PagedList.Config.Builder()
                 .setPageSize(10)
                 .setInitialLoadSizeHint(10)
@@ -21,5 +22,10 @@ class BookViewModel(val lifecycleCoroutineScope: LifecycleCoroutineScope) : View
                 .build()
         val data = LivePagedListBuilder(dataSourceFactory, pagedListConfig)
         return data.build()
+    }
+
+    fun invalidate(query: String?) {
+        dataSourceFactory.invalidateDate()
+        dataSourceFactory.query = query
     }
 }

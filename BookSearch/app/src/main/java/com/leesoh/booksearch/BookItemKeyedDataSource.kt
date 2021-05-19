@@ -1,39 +1,37 @@
 package com.leesoh.booksearch
 
 import android.util.Log
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.paging.ItemKeyedDataSource
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.HttpURLConnection
 
-class BookItemKeyedDataSource(val loadedItems: MutableList<Item>, val lifecycleCoroutineScope: LifecycleCoroutineScope): ItemKeyedDataSource<Int, Item>() {
+class BookItemKeyedDataSource(val loadedItems: MutableList<Item>, val viewModelScope: CoroutineScope, var query: String?): ItemKeyedDataSource<Int, Item>() {
+
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Item>) {
-        Log.d("LSH", "BookItemKeyedDataSource - loadInitial");
         val initKey = 1
-        lifecycleCoroutineScope.launch {
-            Log.d("LSH", "BookViewModel - loadData")
-            val response = NaverBookService().getApiService().getSearchBook(NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, MainActivity.searchKeyword, 10, initKey)
-            loadedItems.addAll(response.items)
-            callback.onResult(response.items)
-            Log.i("LSH", "BookViewModel - " + response.items)
-        }
+        getSearchResult(initKey, callback)
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Item>) {
-
+        // nothing to do
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Item>) {
-        Log.i("LSH", "BookItemKeyedDataSource - loadAfter")
+        getSearchResult(params.key, callback)
+    }
 
-        lifecycleCoroutineScope.launch {
-            Log.d("LSH", "BookViewModel - loadData")
-            val response = NaverBookService().getApiService().getSearchBook(NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, "안", 10, params.key)
-            loadedItems.addAll(response.items)
-            callback.onResult(response.items)
-            Log.i("LSH", "BookViewModel - " + response.items)
+    private fun getSearchResult(initKey: Int, callback: LoadCallback<Item>) {
+        viewModelScope.launch {
+            try {
+                val response = NaverBookService().getApiService().getSearchBook(NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, query, 10, initKey)
+                loadedItems.addAll(response.items)
+                callback.onResult(response.items)
+            } catch (e: HttpException) {
+                Log.i("BookItemKeyedDataSource", "result : " + e.code())
+            }
         }
-        //val items = getTitleItems(params. + 1, params.requestedLoadSize)
-        //callback.onResult(items)
     }
 
     override fun getKey(item: Item): Int {

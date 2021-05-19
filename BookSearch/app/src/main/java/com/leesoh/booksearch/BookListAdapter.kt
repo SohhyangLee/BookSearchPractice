@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -17,17 +16,15 @@ import androidx.recyclerview.widget.RecyclerView
 class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("LSH", "BookListAdapter - onCreateViewHolder");
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_booklist, parent, false)
         return BookTitleListViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("LSH", "BookListAdapter - onBindViewHolder")
         holder.itemView.setOnClickListener{
             startDetailActivity(holder, getItem(position))
         }
-        (holder as BookTitleListViewHolder).bind(requireNotNull(getItem(position)))
+        (holder as BookTitleListViewHolder).bind(requireNotNull(getItem(position))) //null 체크?
     }
 
     private fun startDetailActivity(holder: RecyclerView.ViewHolder, item: Item?){
@@ -55,6 +52,4 @@ class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COM
                     oldItem.title == newItem.title
         }
     }
-
-
 }

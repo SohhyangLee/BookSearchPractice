@@ -1,14 +1,7 @@
 package com.leesoh.booksearch
 
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.*
-import java.lang.RuntimeException
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
 
 class NaverBookService {
     fun getRetrofit():Retrofit {
