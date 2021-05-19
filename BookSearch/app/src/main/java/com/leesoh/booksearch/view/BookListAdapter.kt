@@ -34,7 +34,7 @@ class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COM
         bundle.apply {
             putString("title", item?.title)
             putString("author", item?.author)
-            if (item != null) {
+            item?.let {
                 if((item.image).isNotEmpty()) {
                     putString("image", item?.image)
                 }

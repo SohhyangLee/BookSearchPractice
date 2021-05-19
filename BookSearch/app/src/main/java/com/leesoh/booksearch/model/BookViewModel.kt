@@ -1,4 +1,4 @@
-package com.leesoh.booksearch.view
+package com.leesoh.booksearch.model
 
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
@@ -30,8 +30,7 @@ class BookViewModel(var query: String?) : ViewModel() {
                 .setPrefetchDistance(10)
                 .setEnablePlaceholders(false)
                 .build()
-        val data = LivePagedListBuilder(dataSourceFactory, pagedListConfig)
-        return data.build()
+        return LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
     }
 
     fun invalidate(query: String?) {

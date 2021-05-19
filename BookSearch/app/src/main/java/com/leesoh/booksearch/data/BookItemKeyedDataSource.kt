@@ -1,16 +1,17 @@
-package com.leesoh.booksearch.model
+package com.leesoh.booksearch.data
 
 import android.util.Log
 import androidx.paging.ItemKeyedDataSource
+import com.leesoh.booksearch.model.BookInfo
 import com.leesoh.booksearch.model.Item
-import com.leesoh.booksearch.model.NaverBookService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
-class BookItemKeyedDataSource(val viewModelScope: CoroutineScope, var query: String?, var hasResult:(Boolean) -> Unit): ItemKeyedDataSource<Int, Item>() {
+class BookItemKeyedDataSource(val viewModelScope: CoroutineScope, var query: String?, val hasResult:(Boolean) -> Unit): ItemKeyedDataSource<Int, Item>() {
     private val loadedItems: MutableList<Item> = mutableListOf()
+    private lateinit var response : BookInfo
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Item>) {
         val initKey = 1
@@ -28,7 +29,7 @@ class BookItemKeyedDataSource(val viewModelScope: CoroutineScope, var query: Str
     private fun getSearchResult(initKey: Int, callback: LoadCallback<Item>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = NaverBookService().getApiService().getSearchBook(
+                response = NaverBookService().getApiService().getSearchBook(
                     NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, query, 10, initKey)
                 loadedItems.addAll(response.items)
                 callback.onResult(response.items)

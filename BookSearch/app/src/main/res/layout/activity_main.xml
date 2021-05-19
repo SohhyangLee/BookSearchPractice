@@ -42,6 +42,6 @@
         android:gravity="center"
         android:textAlignment="center"
         android:visibility="gone"
-        android:text="No Result"/>
+        android:text="@string/no_result_string"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
