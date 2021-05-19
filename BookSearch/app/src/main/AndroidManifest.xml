@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:configChanges="orientation|screenLayout|screenSize"
         android:theme="@style/Theme.BookSearch">
-        <activity android:name=".BookDetailActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".view.BookDetailActivity"/>
+        <activity android:name=".view.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

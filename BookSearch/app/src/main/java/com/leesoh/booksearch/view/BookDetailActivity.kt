@@ -1,7 +1,8 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.leesoh.booksearch.R
 import kotlinx.android.synthetic.main.activity_details.*
 import com.squareup.picasso.Picasso
 

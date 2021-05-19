@@ -1,4 +1,4 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leesoh.booksearch.view.BookViewModel
+import com.leesoh.booksearch.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_searchtext.*
 import java.util.*
