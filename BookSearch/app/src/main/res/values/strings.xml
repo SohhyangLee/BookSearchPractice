@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BookSearch</string>
+    <string name="no_result_string">No Result</string>
+    <string name="list_title">Title</string>
+    <string name="list_author">Author</string>
+    <string name="list_price">Price/Discount</string>
+    <string name="list_publisher">Publisher</string>
+    <string name="list_isbn">ISBN</string>
+    <string name="list_pubdate">Pubdate</string>
+    <string name="list_description">Description</string>
 </resources>

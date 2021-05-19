@@ -1,4 +1,4 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 
 import androidx.recyclerview.widget.RecyclerView
+import com.leesoh.booksearch.R
 import com.leesoh.booksearch.model.Item
-import com.leesoh.booksearch.view.BookTitleListViewHolder
 
 
 class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
@@ -34,7 +34,7 @@ class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COM
         bundle.apply {
             putString("title", item?.title)
             putString("author", item?.author)
-            if (item != null) {
+            item?.let {
                 if((item.image).isNotEmpty()) {
                     putString("image", item?.image)
                 }

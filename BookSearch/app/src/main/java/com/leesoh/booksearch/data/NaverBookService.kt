@@ -1,5 +1,6 @@
-package com.leesoh.booksearch.model
+package com.leesoh.booksearch.data
 
+import com.leesoh.booksearch.model.NaverAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
