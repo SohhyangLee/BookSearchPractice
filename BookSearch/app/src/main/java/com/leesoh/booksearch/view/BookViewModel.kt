@@ -1,9 +1,10 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.view
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.leesoh.booksearch.model.BookDataSourceFactory
+import com.leesoh.booksearch.model.Item
 
 class BookViewModel(var query: String?) : ViewModel() {
     val bookInfoLiveData: LiveData<PagedList<Item>> by lazy {
@@ -16,9 +17,13 @@ class BookViewModel(var query: String?) : ViewModel() {
     lateinit var dataSourceFactory: BookDataSourceFactory
 
     private fun getAllTitles(): LiveData<PagedList<Item>> {
-        dataSourceFactory = BookDataSourceFactory(viewModelScope, query) {
-            _hasResult.postValue(it)
-        }
+        dataSourceFactory =
+            BookDataSourceFactory(
+                viewModelScope,
+                query
+            ) {
+                _hasResult.postValue(it)
+            }
         val pagedListConfig = PagedList.Config.Builder()
                 .setPageSize(10)
                 .setInitialLoadSizeHint(10)

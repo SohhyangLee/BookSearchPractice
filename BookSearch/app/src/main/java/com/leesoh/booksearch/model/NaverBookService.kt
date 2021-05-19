@@ -1,4 +1,4 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

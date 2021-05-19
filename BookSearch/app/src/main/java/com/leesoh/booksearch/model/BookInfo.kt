@@ -1,4 +1,4 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.model
 
 import com.google.gson.annotations.SerializedName
 

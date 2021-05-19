@@ -1,4 +1,4 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.model
 
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -12,4 +12,5 @@ interface NaverAPI {
         @Query("query") query: String?,
         @Query("display") display: Int? = 10,
         @Query("start") start: Int? = 1
-    ): BookInfo}
+    ): BookInfo
+}

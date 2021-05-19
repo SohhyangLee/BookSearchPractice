@@ -1,12 +1,11 @@
-package com.leesoh.booksearch
+package com.leesoh.booksearch.model
 
-import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
+import com.leesoh.booksearch.model.Item
+import com.leesoh.booksearch.model.NaverBookService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.DisposableHandle
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 
@@ -29,7 +28,8 @@ class BookItemKeyedDataSource(val viewModelScope: CoroutineScope, var query: Str
     private fun getSearchResult(initKey: Int, callback: LoadCallback<Item>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = NaverBookService().getApiService().getSearchBook(NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, query, 10, initKey)
+                val response = NaverBookService().getApiService().getSearchBook(
+                    NaverBookService.CLIENT_ID, NaverBookService.CLIENT_SECRET, query, 10, initKey)
                 loadedItems.addAll(response.items)
                 callback.onResult(response.items)
                 hasResult.invoke(true)

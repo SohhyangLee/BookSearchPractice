@@ -14,7 +14,9 @@ class BookDetailActivity : AppCompatActivity(){
             titleTextView.text = (intent.getStringExtra("title"))?.replace("<b>", "")?.replace("</b>", "")
         }
         if(intent.hasExtra("image")){
-            Picasso.get().load(intent.getStringExtra("image")).error(R.drawable.ic_launcher_background).into(imageView)
+            Picasso.get().load(intent.getStringExtra("image"))
+                .error(R.drawable.ic_launcher_background)
+                .into(imageView)
         }
         if (intent.hasExtra("author")){
             authorTextView.text = intent.getStringExtra("author")

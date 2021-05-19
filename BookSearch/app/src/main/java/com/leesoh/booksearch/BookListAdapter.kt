@@ -2,16 +2,16 @@ package com.leesoh.booksearch
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 
 import androidx.recyclerview.widget.RecyclerView
+import com.leesoh.booksearch.model.Item
+import com.leesoh.booksearch.view.BookTitleListViewHolder
 
 
 class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
@@ -25,7 +25,7 @@ class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COM
         holder.itemView.setOnClickListener{
             startDetailActivity(holder, getItem(position))
         }
-        (holder as BookTitleListViewHolder).bind(requireNotNull(getItem(position))) //null 체크?
+        (holder as BookTitleListViewHolder).bind(requireNotNull(getItem(position)))
     }
 
     private fun startDetailActivity(holder: RecyclerView.ViewHolder, item: Item?){
@@ -34,8 +34,14 @@ class BookListAdapter : PagedListAdapter<Item, RecyclerView.ViewHolder>(REPO_COM
         bundle.apply {
             putString("title", item?.title)
             putString("author", item?.author)
-            putString("image", item?.image) //item image가 empty or null 일 때 처리
-            //image 사이즈가 너무 클 떄는 어떻게 처리? -> resize를 어떻게 해야할쥐
+            if (item != null) {
+                if((item.image).isNotEmpty()) {
+                    putString("image", item?.image)
+                }
+                else {
+                    putString("image", "R.drawable.ic_launcher_background")
+                }
+            }
             putString("description", item?.description)
             putString("price", item?.price)
             putString("discount", item?.discount)

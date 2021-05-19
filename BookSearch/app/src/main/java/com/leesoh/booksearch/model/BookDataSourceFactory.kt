@@ -1,9 +1,9 @@
-package com.leesoh.booksearch
-
-import android.util.Log
+package com.leesoh.booksearch.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
+import com.leesoh.booksearch.model.BookItemKeyedDataSource
+import com.leesoh.booksearch.model.Item
 import kotlinx.coroutines.CoroutineScope
 
 class BookDataSourceFactory(val viewModelScope: CoroutineScope, var query: String?, var hasResult: (Boolean) -> Unit): DataSource.Factory<Int, Item>() {
@@ -12,7 +12,11 @@ class BookDataSourceFactory(val viewModelScope: CoroutineScope, var query: Strin
     var repoDataSource: BookItemKeyedDataSource? = null
 
     override fun create(): DataSource<Int, Item> {
-        repoDataSource = BookItemKeyedDataSource(viewModelScope, query, hasResult)
+        repoDataSource = BookItemKeyedDataSource(
+            viewModelScope,
+            query,
+            hasResult
+        )
         mutableLiveData.postValue(repoDataSource)
         return requireNotNull(repoDataSource)
     }
