@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-
 import androidx.recyclerview.widget.RecyclerView
 import com.leesoh.booksearch.R
 import com.leesoh.booksearch.model.Item
