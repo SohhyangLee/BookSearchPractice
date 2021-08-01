@@ -7,7 +7,7 @@ Naver Book API 사용 연습 /
 MVVM 아키택처 사용 연습
 
 ## 1. Initial Screen
-<img src="https://user-images.githubusercontent.com/33541924/127777541-6e731e2c-bea2-47c8-851f-0c50cd4fe2ce.jpg" width="40%" heigth="40%">
+<img src="https://user-images.githubusercontent.com/33541924/127777541-6e731e2c-bea2-47c8-851f-0c50cd4fe2ce.jpg" width="50%" heigth="50%">
 
 ## 2. Search the book
 ![SearchBook_BookSearch](https://user-images.githubusercontent.com/33541924/127777291-19addcda-bed2-4aac-beff-9fcf7bc3d941.jpg)
