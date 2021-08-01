@@ -10,13 +10,13 @@ MVVM 아키택처 사용 연습
 <img src="https://user-images.githubusercontent.com/33541924/127777541-6e731e2c-bea2-47c8-851f-0c50cd4fe2ce.jpg" width="45%" heigth="45%">
 
 ## 2. Search the book
-![SearchBook_BookSearch](https://user-images.githubusercontent.com/33541924/127777291-19addcda-bed2-4aac-beff-9fcf7bc3d941.jpg)
+<img src="https://user-images.githubusercontent.com/33541924/127777630-486d3f35-40d2-49d1-8556-05a7d2314cee.jpg" width="45%" heigth="45%">
 
 ## 3. Click the book to see more information
-![ClickBook_BookSearch](https://user-images.githubusercontent.com/33541924/127777303-2fa1bd86-07f1-4049-b317-c91cd851f0a6.jpg)
+<img src="https://user-images.githubusercontent.com/33541924/127777640-0bb0c3d3-6179-4823-8fb9-5ce7398fea92.jpg" width="45%" heigth="45%">
 
 ## 4. It automatically refreshes new lists when scrolling
-![RefreshList_BookSearch](https://user-images.githubusercontent.com/33541924/127777311-3b4b41ad-425a-4025-8acd-85082717848a.jpg)
+<img src="https://user-images.githubusercontent.com/33541924/127777643-69e3f50c-301c-4d14-bb6d-62eca79b4ae9.jpg" width="45%" heigth="45%">
 
 ## 5. When the screen is rotated horizontally, there is no layout change. 
-![HorizontalScreen_BookSearch](https://user-images.githubusercontent.com/33541924/127777317-e33d91f5-9ae7-427c-ab6e-ee693b5754a8.jpg)
+<img src="https://user-images.githubusercontent.com/33541924/127777657-3a9bc61c-46f0-43b3-82b7-f7c81d39676b.jpg" width="45%" heigth="45%">
